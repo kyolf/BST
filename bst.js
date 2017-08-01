@@ -97,3 +97,30 @@ class BST {
         }
     }
 }
+
+function findBSTDepth(node){
+  if(node === null){
+    return -1;
+  }
+  let leftCounter = findBSTDepth(node.left);
+  let rightCounter = findBSTDepth(node.right);
+
+  if(leftCounter > rightCounter){
+    console.log('leftCounter', leftCounter, node.key);
+    return leftCounter+1;
+  }else{
+    console.log('rightCounter', rightCounter, node.key);
+    return rightCounter+1;
+  }
+
+}
+
+
+const bst = new BST();
+
+
+const string = 'EASYQUESTION';
+const arr = string.split('');
+arr.map(el => bst.insert(el,el.charCodeAt(0)));
+console.log(findBSTDepth(bst));
+// console.log(JSON.parse(JSON.stringify(bst, null, 2)));
