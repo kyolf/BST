@@ -116,9 +116,11 @@ function findBSTDepth(node){
 }
 
 function isBST(node) { 
+
   if (node === null) 
     return(true); 
-    
+
+  console.log(node.key);  
   if ((node.left !== null && node.key < node.left.key) || 
         (node.right !== null && node.key > node.right.key)) return false;
         
@@ -127,10 +129,10 @@ function isBST(node) {
     return(false); 
      
   /* false if the min of the right is <= than us */
-    if (node.right !== null && node.right.left !== null && node.right.left.key < node.key) 
+  if (node.right !== null && node.right.left !== null && node.right.left.key < node.key) 
     return(false); 
  
- 
+  
   /* false if, recursively, the left or right is not a BST */
   if (!isBST(node.left) || !isBST(node.right)) 
     return(false); 
@@ -138,6 +140,47 @@ function isBST(node) {
   /* passing all that, it's a BST */
   return(true); 
 } 
+
+function thirdLargest(node){
+  // if(node.right === null){
+  //   if(node.left !== null){
+  //     thirdLargest(node.left);
+  //   }
+  //   else{
+
+  //   }
+  // }
+  // //Farthest Right's Sibling
+  // else{
+  //   thirdLargest(node.right);
+  // }
+  let rootNode = node;
+
+  while(node.right !== null){
+    node = node.right;
+  }
+
+  if(node.left !== null){
+    return node.parent.key;
+  }
+
+  if(node.parent !== null){
+    if(node.parent.left !== null){
+      return node.parent.left.key;
+    }
+    else if(node.parent.parent !== null){
+      return node.parent.parent.key;
+    }
+    else{
+      console.log('BST length less than 3 ');
+      return undefined;
+    }
+  }
+  else{
+    console.log('BST length less than 3');
+    return undefined;
+  }
+}
 
 const bst = new BST();
 class Node {
@@ -157,10 +200,27 @@ root.right = new Node(2);
 // root.left.right = new Node(6);
 // root.right.left = new Node(-20);
 // root.right.right = new Node(-50);
-const string = 'EASYQUESTION';
-const arr = string.split('');
-arr.map(el => bst.insert(el,el.charCodeAt(0)));
+
+// const string = 'EASYQUESTION';
+// const arr = string.split('');
+// arr.map(el => bst.insert(el,el.charCodeAt(0)));
+bst.insert(10,'');
+bst.insert(5,'');
+bst.insert(4, '');
+bst.insert(6,'');
+bst.insert(15,'');
+bst.insert(14,'');
+bst.insert(16,'');
+
 // console.log(findBSTDepth(bst));
 // console.log(JSON.parse(JSON.stringify(bst, null, 2)));
-console.log(isBST(bst))
-console.log(isBST(root))
+console.log(isBST(bst));
+
+// console.log(isBST(root));
+
+// bst.insert(5,'');
+// bst.insert(8,'');
+// bst.insert(2,'');
+// bst.insert(7,'');
+
+// console.log(thirdLargest(bst));
