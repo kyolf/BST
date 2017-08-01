@@ -115,12 +115,52 @@ function findBSTDepth(node){
 
 }
 
+function isBST(node) { 
+  if (node === null) 
+    return(true); 
+    
+  if ((node.left !== null && node.key < node.left.key) || 
+        (node.right !== null && node.key > node.right.key)) return false;
+        
+   /* false if the max of the left is > than us */
+  if (node.left !== null && node.left.right !== null && node.left.right.key > node.key) 
+    return(false); 
+     
+  /* false if the min of the right is <= than us */
+    if (node.right !== null && node.right.left !== null && node.right.left.key < node.key) 
+    return(false); 
+ 
+ 
+  /* false if, recursively, the left or right is not a BST */
+  if (!isBST(node.left) || !isBST(node.right)) 
+    return(false); 
+     
+  /* passing all that, it's a BST */
+  return(true); 
+} 
 
 const bst = new BST();
+class Node {
+    constructor(key=null, value=null, parent=null) {
+        this.key = key;
+        this.value = value;
+        this.parent = parent;
+        this.left = null;
+        this.right = null;
+    }
+}
 
-
+const root = new Node(3);
+root.left = new Node(5);
+root.right = new Node(2);
+// root.left.left = new Node(1);
+// root.left.right = new Node(6);
+// root.right.left = new Node(-20);
+// root.right.right = new Node(-50);
 const string = 'EASYQUESTION';
 const arr = string.split('');
 arr.map(el => bst.insert(el,el.charCodeAt(0)));
-console.log(findBSTDepth(bst));
+// console.log(findBSTDepth(bst));
 // console.log(JSON.parse(JSON.stringify(bst, null, 2)));
+console.log(isBST(bst))
+console.log(isBST(root))
