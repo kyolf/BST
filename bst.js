@@ -115,12 +115,11 @@ function findBSTDepth(node){
   }
 
 }
-
-function isBST(node) { 
-
+let counter = 0;
+function isBST(node) {  
   if (node === null) 
     return(true); 
-    
+  
   if ((node.left !== null && node.key < node.left.key) || 
         (node.right !== null && node.key > node.right.key)) return false;
         
@@ -134,53 +133,41 @@ function isBST(node) {
  
   
   /* false if, recursively, the left or right is not a BST */
-  if (!isBST(node.left) || !isBST(node.right)) 
+  if ((node.left && !isBST(node.left)) || (node.right && !isBST(node.right))) 
     return(false); 
      
   /* passing all that, it's a BST */
   return(true); 
 } 
 
-function thirdLargest(node){
-  // if(node.right === null){
-  //   if(node.left !== null){
-  //     thirdLargest(node.left);
-  //   }
-  //   else{
+// function thirdLargest(node){
+//   let rootNode = node;
 
-  //   }
-  // }
-  // //Farthest Right's Sibling
-  // else{
-  //   thirdLargest(node.right);
-  // }
-  let rootNode = node;
+//   while(node.right !== null){
+//     node = node.right;
+//   }
 
-  while(node.right !== null){
-    node = node.right;
-  }
+//   if(node.left !== null){
+//     return node.parent.key;
+//   }
 
-  if(node.left !== null){
-    return node.parent.key;
-  }
-
-  if(node.parent !== null){
-    if(node.parent.left !== null){
-      return node.parent.left.key;
-    }
-    else if(node.parent.parent !== null){
-      return node.parent.parent.key;
-    }
-    else{
-      console.log('BST length less than 3 ');
-      return undefined;
-    }
-  }
-  else{
-    console.log('BST length less than 3');
-    return undefined;
-  }
-}
+//   if(node.parent !== null){
+//     if(node.parent.left !== null){
+//       return node.parent.left.key;
+//     }
+//     else if(node.parent.parent !== null){
+//       return node.parent.parent.key;
+//     }
+//     else{
+//       console.log('BST length less than 3 ');
+//       return undefined;
+//     }
+//   }
+//   else{
+//     console.log('BST length less than 3');
+//     return undefined;
+//   }
+// }
 
 const bst = new BST();
 class Node {
@@ -212,10 +199,11 @@ bst.insert(15,'');
 bst.insert(14,'');
 bst.insert(16,'');
 
-console.log(findBSTDepth(bst));
-console.log('ticks:',tick);
+// console.log(findBSTDepth(bst));
+
 // console.log(JSON.parse(JSON.stringify(bst, null, 2)));
 console.log(isBST(bst));
+console.log('counter:',counter);
 
 // console.log(isBST(root));
 
