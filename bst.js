@@ -97,8 +97,9 @@ class BST {
         }
     }
 }
-
+let tick = 0;
 function findBSTDepth(node){
+  tick++;
   if(node === null){
     return -1;
   }
@@ -119,8 +120,7 @@ function isBST(node) {
 
   if (node === null) 
     return(true); 
-
-  console.log(node.key);  
+    
   if ((node.left !== null && node.key < node.left.key) || 
         (node.right !== null && node.key > node.right.key)) return false;
         
@@ -212,7 +212,8 @@ bst.insert(15,'');
 bst.insert(14,'');
 bst.insert(16,'');
 
-// console.log(findBSTDepth(bst));
+console.log(findBSTDepth(bst));
+console.log('ticks:',tick);
 // console.log(JSON.parse(JSON.stringify(bst, null, 2)));
 console.log(isBST(bst));
 
